@@ -1,0 +1,52 @@
+# 01-max-profit.py
+# Topic: Stocks buy-sell
+
+def max_profit(n):
+    prices = list(range(n, 0, -1)) + list(range(1, n + 1))
+    min_price, profit = prices[0], 0
+    for p in prices[1:]:
+        min_price = min(min_price, p)
+        profit = max(profit, p - min_price)
+    return profit
+
+input("max_profit(n) finds the best single buy-sell in prices [n..1, 1..n].  Press Enter ")
+print("  max_profit(4) =", max_profit(4))
+print("  max_profit(5) =", max_profit(5))
+n = int(input("Enter n (try 6 or 7): "))
+guess = input("What is max_profit(" + str(n) + ")? ")
+input("track min price so far — sell when the gap beats the current best.  Press Enter ")
+print("  max_profit(" + str(n) + ") =", max_profit(n), "  your guess:", guess)
+
+# 02-total-profit.py
+# Topic: Profit accumulation
+
+def total_profit(n):
+    prices = [1, n, 1, n, 1]
+    profit = 0
+    for i in range(1, len(prices)):
+        if prices[i] > prices[i - 1]:
+            profit += prices[i] - prices[i - 1]
+    return profit
+
+input("total_profit(n) sums every upswing in prices [1, n, 1, n, 1].  Press Enter ")
+print("  total_profit(4) =", total_profit(4))
+print("  total_profit(5) =", total_profit(5))
+n = int(input("Enter n (try 6 or 7): "))
+guess = input("What is total_profit(" + str(n) + ")? ")
+input("add every positive step — two peaks each contribute n-1.  Press Enter ")
+print("  total_profit(" + str(n) + ") =", total_profit(n), "  your guess:", guess)
+
+# 03-rainwater.py
+# Topic: Left tallest bars, Right tallest bars, Rainwater trapped
+
+def rainwater(n):
+    bars = [0, n, 0, n, 0]
+    return min(max(bars[:3]), max(bars[2:])) - bars[2]
+
+input("rainwater(n) traps water between two bars of height n.  Press Enter ")
+print("  rainwater(3) =", rainwater(3))
+print("  rainwater(4) =", rainwater(4))
+n = int(input("Enter bar height (try 5 or 6): "))
+guess = input("What is rainwater(" + str(n) + ")? ")
+input("water = min(left tallest, right tallest) - bar height at the gap.  Press Enter ")
+print("  rainwater(" + str(n) + ") =", rainwater(n), "  your guess:", guess)
